@@ -1,8 +1,12 @@
+using System.Text;
+using System.Collections.Generic;
 using System;
 
 using LojaVirtual.Libraries;
 using LojaVirtual.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+
 namespace LojaVirtual.Controllers
 {
 public class HomeController : Controller
@@ -27,8 +31,20 @@ public class HomeController : Controller
             contact.Name = HttpContext.Request.Form["name"];
             contact.Email = HttpContext.Request.Form["email"];
             contact.Text = HttpContext.Request.Form["text"];
-            ContactEmail.SedContact(contact);
-            ViewData["MSG_S"] = "Mensagem de contato enciado com sucesso!";
+
+            var messages = new List<ValidationResult>();
+            var contexto = new ValidationContext(contact);
+            bool isValid = Validator.TryValidateObject(contact, contexto, messages, true);
+            if(isValid){
+                ContactEmail.SedContact(contact);
+                ViewData["MSG_S"] = "Mensagem de contato enciado com sucesso!";        
+            }else {
+                StringBuilder stringBuilder = new StringBuilder();
+                foreach(var message in messages){
+                    stringBuilder.Append(message.ErrorMessage+ "<br/>");
+                }
+                ViewData["MSG_E"] = stringBuilder.ToString();
+            }
         }catch (Exception e) {
             ViewData["MSG_E"] = "Ops! Tivemos um erro, tente novamente mais tarde!" + e;
         }

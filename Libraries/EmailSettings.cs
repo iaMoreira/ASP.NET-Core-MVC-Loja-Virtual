@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using System;
 using System.Net;
 using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
 
 namespace LojaVirtual.Libraries
 {
@@ -14,7 +15,9 @@ namespace LojaVirtual.Libraries
         public static String FromEmail { get; set; }
         private static SmtpClient smtp;
 
+        public static IConfiguration Configuration;
         public EmailSettings () {
+            // Object x = Configuration.GetSection("EmailSettings").GetConnectionString();
             smtp = new SmtpClient("smtp.gmail.com", 587);
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential("ianmoreira80@gmail.com", "");
