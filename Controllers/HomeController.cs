@@ -44,6 +44,7 @@ public class HomeController : Controller
                     stringBuilder.Append(message.ErrorMessage+ "<br/>");
                 }
                 ViewData["MSG_E"] = stringBuilder.ToString();
+                ViewData["contact"] = contact;
             }
         }catch (Exception e) {
             ViewData["MSG_E"] = "Ops! Tivemos um erro, tente novamente mais tarde!" + e;

@@ -1,5 +1,6 @@
 @{
     ViewData["Title"] = "Contact";
+    LojaVirtual.Models.Contact contact = (LojaVirtual.Models.Contact) ViewData["contact"];
 }
  <main role="main">
         <br />
@@ -50,7 +51,7 @@
                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                             </div>
                                             <input type="text" class="form-control" name="name" id="name" placeholder=""
-                                                required="">
+                                                required="" value="@(contact != null ? contact.Name : "" )">
                                         </div> 
                                     </div> 
 
@@ -60,7 +61,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-at"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" name="email" id="email" placeholder="">
+                                            <input type="text" class="form-control" name="email" id="email" placeholder=""
+                                                value="@(contact != null ? contact.Email : "" )">
                                         </div> 
                                     </div> 
 
@@ -69,7 +71,7 @@
                                             <div class="form-group">
                                                 <label label="text"><span class="hidden-xs">Texto</span> </label>
                                                 <div class="form-inline">
-                                                    <textarea class="form-control" name="text" id="text" style="width:100%"></textarea>
+                                                    <textarea class="form-control" name="text" id="text" style="width:100%">@(contact != null ? contact.Text : "" )</textarea>
 
                                                 </div>
                                             </div>
