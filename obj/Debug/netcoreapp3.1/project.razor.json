@@ -20506,28 +20506,33 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Shared/_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Views/Shared/_ValidationScriptsPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views/Shared/_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Home/Privacy.cshtml",
-      "TargetPath": "Views/Home/Privacy.cshtml",
+      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Home/Contact.cshtml",
+      "TargetPath": "Views/Home/Contact.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Shared/Error.cshtml",
-      "TargetPath": "Views/Shared/Error.cshtml",
+      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Home/Login.cshtml",
+      "TargetPath": "Views/Home/Login.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/_ViewImports.cshtml",
-      "TargetPath": "Views/_ViewImports.cshtml",
+      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Home/ShoppingCart.cshtml",
+      "TargetPath": "Views/Home/ShoppingCart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Product/index.cshtml",
+      "TargetPath": "Views/Product/index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/ian/Documentos/dotnet/LojaVirtual/Views/Home/Register.cshtml",
+      "TargetPath": "Views/Home/Register.cshtml",
       "FileKind": "mvc"
     },
     {

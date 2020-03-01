@@ -1,0 +1,13 @@
+@model LojaVirtual.Models.Product
+
+<h3>Product Index :)</h3>
+
+@{
+    string nome = "Ian Andrade";
+}
+<h2><b>Cod: </b>@Model.Id</h2>
+<h2><b>Nome: </b>@Model.Name</h2>
+<h2><b>Descrição: </b>@Model.Description</h2>
+<h2><b>Valor: </b>@Model.Value.ToString("C")</h2>
+
+Todos os direitos reservador &copy; @DateTime.Now.Year
