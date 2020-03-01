@@ -1,4 +1,6 @@
+using System;
 
+using LojaVirtual.Libraries;
 using LojaVirtual.Models;
 using Microsoft.AspNetCore.Mvc;
 namespace LojaVirtual.Controllers
@@ -20,11 +22,17 @@ public class HomeController : Controller
 
     public IActionResult ContactStore()
     {
-        Contact contact = new Contact();
-        contact.Name = HttpContext.Request.Form["name"];
-        contact.Email = HttpContext.Request.Form["email"];
-        contact.Text = HttpContext.Request.Form["text"];
-        return new ContentResult() { Content = string.Format("Dados recebidos com sucesso!<br/>Nome: {0} <br/>E-mai: {1}<br/>Texto: {2}", contact.Name, contact.Email, contact.Text), ContentType = "text/html"};
+        try{
+            Contact contact = new Contact();
+            contact.Name = HttpContext.Request.Form["name"];
+            contact.Email = HttpContext.Request.Form["email"];
+            contact.Text = HttpContext.Request.Form["text"];
+            ContactEmail.SedContact(contact);
+            ViewData["MSG_S"] = "Mensagem de contato enciado com sucesso!";
+        }catch (Exception e) {
+            ViewData["MSG_E"] = "Ops! Tivemos um erro, tente novamente mais tarde!" + e;
+        }
+        return View("Contact");
     }
     
 
