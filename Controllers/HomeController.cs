@@ -6,14 +6,35 @@ using LojaVirtual.Libraries;
 using LojaVirtual.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using LojaVirtual.Database;
 
 namespace LojaVirtual.Controllers
 {
 public class HomeController : Controller
 {
+    private LojaVirtualContext _database;
+    public HomeController(LojaVirtualContext database)
+    {
+        _database = database;
+    }
+    [HttpGet]
     public IActionResult Index()
     {
         return View();
+    }
+    [HttpPost]
+    public IActionResult Index([FromForm]NewsletterEmail newsletter)
+    {
+        if(ModelState.IsValid){
+            //TODO - Adição no banco de dados
+            _database.NewsletterEmails.Add(newsletter);
+            _database.SaveChanges();
+            TempData["MSG_S"] = "E-Mail cadastrado! Agora você vai receber promoções no seu email!";
+            return RedirectToAction(nameof(Index));
+        }else {
+
+            return View();
+        }
     }
     public IActionResult About()
     {
