@@ -79,8 +79,23 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
     public IActionResult Register()
     {
+        return View();
+    }
+    [HttpPost]
+    public IActionResult Register([FromForm] Client client)
+    {
+        if(ModelState.IsValid){
+            _database.Add(client);
+            _database.SaveChanges();
+
+            TempData["MSG_S"] = "Cadastro realizado com sucesso!";
+
+            //TODO - Implementar redirecionamente Diferentes
+            return RedirectToAction(nameof(Register));
+        }
         return View();
     }
     public IActionResult ShoppingCart(){
