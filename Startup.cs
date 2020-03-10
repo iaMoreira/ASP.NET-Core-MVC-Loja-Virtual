@@ -12,7 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using LojaVirtual.Database;
-using LojaVirtual.Models.Repositories;
+using LojaVirtual.Repositories;
+using LojaVirtual.Repositories.Contracts;
 
 namespace LojaVirtual
 {
@@ -31,6 +32,7 @@ namespace LojaVirtual
         {
            //bind repositories 
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<INewsLatterRepository, NewsLatterRepository>();
             // services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddControllersWithViews();
             // string connection = "server=db;port=1433;userid=sa;password=<YourStrong@Passw0rd>;database=LojaVirtual";

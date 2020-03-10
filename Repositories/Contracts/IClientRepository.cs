@@ -1,5 +1,10 @@
+using System;
 using System.Collections.Generic;
-namespace LojaVirtual.Models.Repositories
+using System.Linq;
+using System.Threading.Tasks;
+using LojaVirtual.Models;
+
+namespace LojaVirtual.Repositories.Contracts
 {
     public interface IClientRepository
     {
@@ -10,6 +15,6 @@ namespace LojaVirtual.Models.Repositories
         void Destroy(int Id);
          
         Client Show(int Id);
-        List<Client> All();
+        IEnumerable<Client> All();
     }
 }

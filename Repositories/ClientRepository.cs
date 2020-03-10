@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using LojaVirtual.Database;
 using LojaVirtual.Models;
+using LojaVirtual.Repositories.Contracts;
 
-namespace LojaVirtual.Models.Repositories
+namespace LojaVirtual.Repositories
 {
     public class ClientRepository : IClientRepository
     {
@@ -16,7 +17,7 @@ namespace LojaVirtual.Models.Repositories
             _database = database;
         }
 
-        public List<Client> All()
+        public IEnumerable<Client> All()
         {
             return _database.Clients.ToList();
         }
@@ -37,8 +38,6 @@ namespace LojaVirtual.Models.Repositories
         {
             return _database.Clients.Find(Id);
         }
-
-
 
         public void Update(Client client)
         {
