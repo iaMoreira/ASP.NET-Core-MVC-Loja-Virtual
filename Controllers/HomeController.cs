@@ -7,15 +7,16 @@ using LojaVirtual.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using LojaVirtual.Database;
+using LojaVirtual.Models.Repositories;
 
 namespace LojaVirtual.Controllers
 {
 public class HomeController : Controller
 {
-    private LojaVirtualContext _database;
-    public HomeController(LojaVirtualContext database)
+    private IClientRepository _repository;
+    public HomeController(IClientRepository repository)
     {
-        _database = database;
+        _repository = repository;
     }
     [HttpGet]
     public IActionResult Index()
@@ -27,9 +28,11 @@ public class HomeController : Controller
     {
         if(ModelState.IsValid){
             //TODO - Adição no banco de dados
+            /*
             _database.NewsletterEmails.Add(newsletter);
             _database.SaveChanges();
             TempData["MSG_S"] = "E-Mail cadastrado! Agora você vai receber promoções no seu email!";
+            */
             return RedirectToAction(nameof(Index));
         }else {
 
@@ -88,9 +91,7 @@ public class HomeController : Controller
     public IActionResult Register([FromForm] Client client)
     {
         if(ModelState.IsValid){
-            _database.Add(client);
-            _database.SaveChanges();
-
+            _repository.Store(client);
             TempData["MSG_S"] = "Cadastro realizado com sucesso!";
 
             //TODO - Implementar redirecionamente Diferentes

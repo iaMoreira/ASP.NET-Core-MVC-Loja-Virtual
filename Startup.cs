@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using LojaVirtual.Database;
+using LojaVirtual.Models.Repositories;
 
 namespace LojaVirtual
 {
@@ -28,6 +29,8 @@ namespace LojaVirtual
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           //bind repositories 
+            services.AddScoped<IClientRepository, ClientRepository>();
             // services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddControllersWithViews();
             // string connection = "server=db;port=1433;userid=sa;password=<YourStrong@Passw0rd>;database=LojaVirtual";
