@@ -38,6 +38,10 @@ namespace LojaVirtual
             // string connection = "server=db;port=1433;userid=sa;password=<YourStrong@Passw0rd>;database=LojaVirtual";
             string connection = "Server=127.0.0.1;Database=LojaVirtual;User Id=sa;Password=<YourStrong@Passw0rd>;";
             services.AddDbContext<LojaVirtualContext> (options => options.UseSqlServer(connection));
+            services.AddMemoryCache(); // guardar dados na memória
+            services.AddSession(options =>  {
+                // options.io
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +61,7 @@ namespace LojaVirtual
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

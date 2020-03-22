@@ -1,3 +1,5 @@
+using System.Net.WebSockets;
+using System.Net.Http;
 using System.Text;
 using System.Collections.Generic;
 using System;
@@ -76,10 +78,21 @@ public class HomeController : Controller
         return View("Contact");
     }
     
+    [HttpGet]
 
     public IActionResult Login()
     {
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult Login([FromForm] Client client)
+    {
+        if(client   .Email == "ianmoreira80@gmail.com" && client   .Password == "123"){
+            return new ContentResult() {Content = "Logado!"};
+        }else {
+            return new ContentResult() {Content = "Não Logado!"};
+        }
     }
 
     [HttpGet]
