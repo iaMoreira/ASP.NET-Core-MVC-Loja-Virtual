@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LojaVirtual.Libraries;
+using LojaVirtual.Libraries.Session;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,9 +40,12 @@ namespace LojaVirtual
             string connection = "Server=127.0.0.1;Database=LojaVirtual;User Id=sa;Password=<YourStrong@Passw0rd>;";
             services.AddDbContext<LojaVirtualContext> (options => options.UseSqlServer(connection));
             services.AddMemoryCache(); // guardar dados na memória
+
+            services.AddHttpContextAccessor();
             services.AddSession(options =>  {
                 // options.io
             });
+            services.AddScoped<Session>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
