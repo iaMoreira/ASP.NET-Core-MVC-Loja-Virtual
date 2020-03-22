@@ -1,5 +1,4 @@
 using System.Net;
-using System.Net.WebSockets;
 using System.Net.Http;
 using System.Text;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using LojaVirtual.Database;
 using LojaVirtual.Repositories.Contracts;
-
+using Microsoft.AspNetCore.Http;
 namespace LojaVirtual.Controllers
 {
 public class HomeController : Controller
@@ -91,6 +90,7 @@ public class HomeController : Controller
     {
         if(client   .Email == "ianmoreira80@gmail.com" && client   .Password == "123"){
             HttpContext.Session.Set("ID", new byte[] {52} );
+            HttpContext.Session.SetString("Email", client.Email );
             return new ContentResult() {Content = "Logado!"};
         }else {
             return new ContentResult() {Content = "Não Logado!"};
@@ -102,7 +102,7 @@ public class HomeController : Controller
     {   
         byte[] UserID;
         if(HttpContext.Session.TryGetValue("ID", out UserID)){
-            return new ContentResult() {Content = "Acesso Consedido: " + UserID[0] + "Logado."};
+            return new ContentResult() {Content = "Usuário: " + UserID[0] + ", Email: "+ HttpContext.Session.GetString("Email")};
         }else {
             return new ContentResult() {Content = "Acesso negado."};
         }
