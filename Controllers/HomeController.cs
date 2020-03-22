@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.WebSockets;
 using System.Net.Http;
 using System.Text;
@@ -89,9 +90,21 @@ public class HomeController : Controller
     public IActionResult Login([FromForm] Client client)
     {
         if(client   .Email == "ianmoreira80@gmail.com" && client   .Password == "123"){
+            HttpContext.Session.Set("ID", new byte[] {52} );
             return new ContentResult() {Content = "Logado!"};
         }else {
             return new ContentResult() {Content = "Não Logado!"};
+        }
+    }
+
+    [HttpGet]
+    public IActionResult Dashboard()
+    {   
+        byte[] UserID;
+        if(HttpContext.Session.TryGetValue("ID", out UserID)){
+            return new ContentResult() {Content = "Acesso Consedido: " + UserID[0] + "Logado."};
+        }else {
+            return new ContentResult() {Content = "Acesso negado."};
         }
     }
 
