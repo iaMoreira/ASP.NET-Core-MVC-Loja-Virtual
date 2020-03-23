@@ -22,8 +22,11 @@ namespace LojaVirtual.Libraries.Auth
 
         public Client User()
         {
-            string client = _session.Search(Key);
-            return JsonConvert.DeserializeObject<Client>(client);
+            if(_session.Exist(Key)){
+                string client = _session.Search(Key);
+                return JsonConvert.DeserializeObject<Client>(client);
+            }
+            return null;
         }
 
         public void Logout()

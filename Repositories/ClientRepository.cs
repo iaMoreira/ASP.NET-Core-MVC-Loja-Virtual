@@ -30,7 +30,7 @@ namespace LojaVirtual.Repositories
         }
         public Client Login(string Email, string Password)
         {
-            Client client = _database.Clients.Where(m => m.Email == Email && m.Password == Password).First();
+            Client client = _database.Clients.Where(m => m.Email == Email && m.Password == Password).FirstOrDefault();
             return client;
         }
 

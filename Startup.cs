@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using LojaVirtual.Database;
 using LojaVirtual.Repositories;
 using LojaVirtual.Repositories.Contracts;
-
+using LojaVirtual.Libraries.Auth;
 namespace LojaVirtual
 {
     public class Startup
@@ -46,6 +46,7 @@ namespace LojaVirtual
                 // options.io
             });
             services.AddScoped<Session>();
+            services.AddScoped<Auth>();
             services.AddMvc().AddNewtonsoftJson();
         }
 

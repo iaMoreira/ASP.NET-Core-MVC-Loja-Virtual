@@ -1,3 +1,5 @@
+using System.Xml;
+using System.Net.WebSockets;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -6,6 +8,7 @@ using System;
 
 using LojaVirtual.Libraries;
 using LojaVirtual.Models;
+using LojaVirtual.Libraries.Auth;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using LojaVirtual.Database;
@@ -17,10 +20,13 @@ public class HomeController : Controller
 {
     private IClientRepository _clientRepository;
     private INewsLatterRepository _newslatterRepository;
-    public HomeController(IClientRepository clientRepository, INewsLatterRepository newslatterRepository)
+    private Auth _auth;
+
+    public HomeController(IClientRepository clientRepository, INewsLatterRepository newslatterRepository, Auth auth)
     {
         _clientRepository = clientRepository;
         _newslatterRepository = newslatterRepository;
+        _auth = auth;
     }
     [HttpGet]
     public IActionResult Index()
@@ -88,21 +94,22 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Login([FromForm] Client client)
     {
-        if(client   .Email == "ianmoreira80@gmail.com" && client   .Password == "123"){
-            HttpContext.Session.Set("ID", new byte[] {52} );
-            HttpContext.Session.SetString("Email", client.Email );
-            return new ContentResult() {Content = "Logado!"};
+        Client clientdb = _clientRepository.Login(client.Email, client.Password);
+        if(clientdb  != null){
+            _auth.Login(clientdb);
+            return new RedirectResult(Url.Action(nameof(Dashboard)));
         }else {
-            return new ContentResult() {Content = "Não Logado!"};
+            ViewData["MSG_E"] = "Usuário não encontrado, verifique o email e senha!";
+            return View();
         }
     }
 
     [HttpGet]
     public IActionResult Dashboard()
     {   
-        byte[] UserID;
-        if(HttpContext.Session.TryGetValue("ID", out UserID)){
-            return new ContentResult() {Content = "Usuário: " + UserID[0] + ", Email: "+ HttpContext.Session.GetString("Email")};
+        Client client = _auth.User();
+        if(client != null){
+            return new ContentResult() {Content = "Usuário: " + client.Id + ", Email: "+ client.Email};
         }else {
             return new ContentResult() {Content = "Acesso negado."};
         }
