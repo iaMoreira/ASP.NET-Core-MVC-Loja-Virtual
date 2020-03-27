@@ -47,6 +47,7 @@ namespace LojaVirtual
             });
             services.AddScoped<Session>();
             services.AddScoped<Auth>();
+            services.AddScoped<LoginModerator>();
             services.AddMvc().AddNewtonsoftJson();
         }
 
@@ -72,6 +73,10 @@ namespace LojaVirtual
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
