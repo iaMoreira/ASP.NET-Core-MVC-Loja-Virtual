@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System;
 
 using LojaVirtual.Libraries;
+using LojaVirtual.Libraries.Filter;
 using LojaVirtual.Models;
 using LojaVirtual.Libraries.Auth;
 using Microsoft.AspNetCore.Mvc;
@@ -105,14 +106,10 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    [ClientAuthorizationAttribute]
     public IActionResult Dashboard()
     {   
-        Client client = _auth.User();
-        if(client != null){
-            return new ContentResult() {Content = "Usuário: " + client.Id + ", Email: "+ client.Email};
-        }else {
-            return new ContentResult() {Content = "Acesso negado."};
-        }
+        return new ContentResult() {Content = "Este é a dashboard"};
     }
 
     [HttpGet]
