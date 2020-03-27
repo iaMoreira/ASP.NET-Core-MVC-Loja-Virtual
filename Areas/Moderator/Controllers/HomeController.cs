@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace LojaVirtual.Areas.Moderator.Controllers
 {
+    [Area("Moderator")]
     public class HomeController : Controller
     {
         public IActionResult Index()
